@@ -1,0 +1,23 @@
+{
+    "name": "node-trakt",
+    "version": "0.0.0",
+    "description": "A wrapper for the trakt.tv API",
+    "main": "index.js",
+    "scripts": {
+        "test": "node test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Mesoptier/node-trakt"
+    },
+    "keywords": [
+        "trakt",
+        "movie",
+        "tvshow"
+    ],
+    "author": "Koen Klaren <koen.klaren@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Mesoptier/node-trakt/issues"
+    }
+}
