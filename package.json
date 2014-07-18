@@ -1,6 +1,6 @@
 {
-  "name": "node-trakt",
-  "version": "0.0.2",
+  "name": "node-trakt-patch",
+  "version": "0.0.3",
   "description": "A wrapper for the trakt.tv API",
   "main": "index.js",
   "scripts": {
@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mesoptier/node-trakt"
+    "url": "https://github.com/cobaimelan/node-trakt"
   },
   "keywords": [
     "trakt",
     "movie",
     "tvshow"
   ],
-  "author": "Koen Klaren <koen.klaren@gmail.com>",
+  "author": "Ayhan Kuru <ayhankuru@yandex.com.tr>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Mesoptier/node-trakt/issues"
+    "url": "https://github.com/cobaimelan/node-trakt/issues"
   },
   "dependencies": {
     "underscore": "~1.5.2"
