@@ -12,7 +12,8 @@ npm install node-trakt
 
 ## Example
 ```javascript
-var trakt = require("node-trakt")("api-key");
+var trakt = require("node-trakt")
+trakt.init("api-key");
 
 // Get movie information for The Lone Ranger (2013)
 trakt.movieSummary({ title: "tt1210819" }, function(err, movie){
