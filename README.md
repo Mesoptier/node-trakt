@@ -1,3 +1,6 @@
+**NOTE:** *The readme is not yet updated for the 1.0.0 rewrite.
+Most methods will remain the same and I might implement some support for the current methods (e.g. current `init({apikey: "apikey"})` vs old `init("apikey")`).*
+
 # node-trakt
 node-trakt is a wrapper for the trakt.tv API. It supports:
 

@@ -1,11 +1,8 @@
 {
   "name": "node-trakt",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A wrapper for the trakt.tv API",
-  "main": "index.js",
-  "scripts": {
-    "test": "node test.js"
-  },
+  "main": "src/trakt.coffee",
   "repository": {
     "type": "git",
     "url": "https://github.com/Mesoptier/node-trakt"
@@ -21,6 +18,10 @@
     "url": "https://github.com/Mesoptier/node-trakt/issues"
   },
   "dependencies": {
-    "underscore": "~1.5.2"
+    "request": "^2.40.0",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.8.0"
   }
 }
