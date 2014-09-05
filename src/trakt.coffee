@@ -33,10 +33,14 @@ trakt = module.exports =
     # Prepare the request
     options =
       url: @options.baseUrl + path
-      method: post ? "POST" : "GET"
 
     # For POST requests, set body, otherwise set querystring
-    options[(post ? "json" : "qs")] = params
+    if post
+      options.method = "post"
+      options.json = params
+    else
+      options.method = "get"
+      options.qs = params
 
     request options, callback
 
