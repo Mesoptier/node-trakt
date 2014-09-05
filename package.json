@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A wrapper for the trakt.tv API",
   "main": "src/trakt.coffee",
+  "scripts": {
+    "prepublish": "gulp prepublish"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Mesoptier/node-trakt"
