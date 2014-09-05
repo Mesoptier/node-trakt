@@ -16,7 +16,6 @@ account:
     auth: true
     post: true
 
-
 activity:
   community:
     path: ".json/{apikey}/{types}/{actions}/{start_ts}/{end_ts}"
@@ -51,7 +50,6 @@ activity:
 
   "user/shows":
     path: ".json/{apikey}/{username}/{title}/{actions}/{start_ts}/{end_ts}"
-
 
 movie:
   cancelcheckin:
