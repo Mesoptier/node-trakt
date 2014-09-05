@@ -67,7 +67,7 @@ movie:
     post: true
 
   watchingnow:
-    path: "movie/watchingnow.format/{apikey}/{title}"
+    path: "movie/watchingnow.json/{apikey}/{title}"
 
   watchlist:
     path: "movie/watchlist/{apikey}"
