@@ -124,3 +124,7 @@ movie:
     path: "/{apikey}"
     auth: true
     post: true
+
+server:
+  time:
+    path: ".json/{apikey}"

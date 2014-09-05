@@ -1,9 +1,42 @@
+assert = require "assert"
+nock = require "nock"
 trakt = require "../src/trakt.coffee"
 
-trakt.init
-  apikey: "db5ecf5582f5886f910a5a9cdc2b5065"
-  username: "tube-test"
-  password: "tube-test"
+describe "node-trakt", ->
+  httpScope = nock "http://api.trakt.tv"
+  httpsScope = nock "https://api.trakt.tv"
 
-trakt.movieSummary { title: "tt1210819" }, (err, data) ->
-  console.log err, data
+  apikey = "00000000000000000000000000000000"
+
+  trakt.init
+    apikey: apikey
+    username: "test"
+    password: "test"
+    secure: false
+
+  describe "request", ->
+
+    describe "with {secure: false}", ->
+
+      it "should use http protocol", (done) ->
+        httpScope
+          .get "/server/time.json/#{apikey}"
+          .reply 200, ->
+            assert.ok true
+            done()
+
+        trakt.serverTime()
+
+
+    describe "with {secure: true}", ->
+      before -> trakt.options.secure = true
+      after -> trakt.options.secure = false
+
+      it "should use https protocol", (done) ->
+        httpsScope
+          .get "/server/time.json/#{apikey}"
+          .reply 200, ->
+            assert.ok true
+            done()
+
+        trakt.serverTime()
