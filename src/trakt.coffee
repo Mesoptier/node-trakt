@@ -1,11 +1,14 @@
 _ = require "lodash"
+url = require "url"
 request = require "request"
 
 trakt = module.exports =
 
   # Default options
   options:
-    baseUrl: "http://api.trakt.tv/"
+    secure: true
+    hostname: "api.trakt.tv"
+    basepath: "/"
 
 
   # Initiates the wrapper
@@ -32,7 +35,10 @@ trakt = module.exports =
 
     # Prepare the request
     options =
-      url: @options.baseUrl + path
+      url:
+        protocol: if @options.secure then "https" else "http"
+        hostname: @options.hostname
+        pathname: @options.basepath + path
 
     # For POST requests, set body, otherwise set querystring
     if post
@@ -42,7 +48,11 @@ trakt = module.exports =
       options.method = "get"
       options.qs = params
 
-    request options, callback
+    options.url = url.format options.url
+
+    request options, (err, res, body) =>
+      callback err if err
+      callback null, JSON.parse body
 
 
 # Load endpoints and create corresponding request methods
