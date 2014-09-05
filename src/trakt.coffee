@@ -22,6 +22,11 @@ trakt = module.exports =
 
   # Makes requests to the API server
   request: ({path, post, auth}, params, callback) ->
+    # Handle optional params
+    if !_.isFunction callback && _.isFunction params
+      callback = params
+      params = null
+
     # Resolve the path
     path = path.replace "{apikey}", @options.apikey
 
@@ -52,7 +57,7 @@ trakt = module.exports =
 
     request options, (err, res, body) =>
       return callback err if err
-      callback null, JSON.parse body
+      callback null, JSON.parse(body) if body
 
 
 # Load endpoints and create corresponding request methods
