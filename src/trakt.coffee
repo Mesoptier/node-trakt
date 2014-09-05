@@ -60,5 +60,11 @@ endpoints = require "./endpoints"
 
 for name1, methods of endpoints
   for name2, options of methods
-    name = name1 + name2[0].toUpperCase() + name2[1..-1]
+    # Construct method name based on path
+    path = "#{name1}/#{name2}"
+    name = path.split("/")
+      .reduce (name = "", part) ->
+        name + part[0].toUpperCase() + part[1..-1]
+
+    options.path = "#{path}#{options.path}"
     trakt[name] = trakt.request.bind trakt, options

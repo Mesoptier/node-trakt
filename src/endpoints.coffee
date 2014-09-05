@@ -1,75 +1,128 @@
 module.exports =
 
+account:
+  create:
+    path: "/{apikey}"
+    auth: true
+    post: true
+
+  settings:
+    path: "/{apikey}"
+    auth: true
+    post: true
+
+  test:
+    path: "/{apikey}"
+    auth: true
+    post: true
+
+
+activity:
+  community:
+    path: ".json/{apikey}/{types}/{actions}/{start_ts}/{end_ts}"
+
+  episodes:
+    path: ".json/{apikey}/{title}/{season}/{episode}/{actions}/{start_ts}/{end_ts}"
+
+  friends:
+    path: ".json/{apikey}/{types}/{actions}/{start_ts}/{end_ts}"
+    auth: true
+
+  movies:
+    path: ".json/{apikey}/{title}/{actions}/{start_ts}/{end_ts}"
+
+  seasons:
+    path: ".json/{apikey}/{title}/{season}/{actions}/{start_ts}/{end_ts}"
+
+  shows:
+    path: ".json/{apikey}/{title}/{actions}/{start_ts}/{end_ts}"
+
+  user:
+    path: ".json/{apikey}/{username}/{types}/{actions}/{start_ts}/{end_ts}"
+
+  "user/episodes":
+    path: ".json/{apikey}/{username}/{title}/{season}/{episode}/{actions}/{start_ts}/{end_ts}"
+
+  "user/movies":
+    path: ".json/{apikey}/{username}/{title}/{actions}/{start_ts}/{end_ts}"
+
+  "user/seasons":
+    path: ".json/{apikey}/{username}/{title}/{season}/{actions}/{start_ts}/{end_ts}"
+
+  "user/shows":
+    path: ".json/{apikey}/{username}/{title}/{actions}/{start_ts}/{end_ts}"
+
+
 movie:
   cancelcheckin:
-    path: "movie/cancelcheckin/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   cancelwatching:
-    path: "movie/cancelwatching/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   checkin:
-    path: "movie/checkin/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   comments:
-    path: "movie/comments.json/{apikey}/{title}/{type}"
+    path: ".json/{apikey}/{title}/{type}"
 
   scrobble:
-    path: "movie/scrobble/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   seen:
-    path: "movie/seen/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   library:
-    path: "movie/library/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   related:
-    path: "movie/related.json/{apikey}/{title}/{hidewatched}"
+    path: ".json/{apikey}/{title}/{hidewatched}"
 
   stats:
-    path: "movie/stats.json/{apikey}/{title}"
+    path: ".json/{apikey}/{title}"
 
   summary:
-    path: "movie/summary.json/{apikey}/{title}"
+    path: ".json/{apikey}/{title}"
 
   summaries:
-    path: "movie/summaries.json/{apikey}/{title}/{extended}"
+    path: ".json/{apikey}/{title}/{extended}"
 
   unlibrary:
-    path: "movie/unlibrary/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   unseen:
-    path: "movie/unseen/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   unwatchlist:
-    path: "movie/unwatchlist/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   watching:
-    path: "movie/watching/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
 
   watchingnow:
-    path: "movie/watchingnow.json/{apikey}/{title}"
+    path: ".json/{apikey}/{title}"
 
   watchlist:
-    path: "movie/watchlist/{apikey}"
+    path: "/{apikey}"
     auth: true
     post: true
