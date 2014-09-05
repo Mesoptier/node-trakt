@@ -51,7 +51,7 @@ trakt = module.exports =
     options.url = url.format options.url
 
     request options, (err, res, body) =>
-      callback err if err
+      return callback err if err
       callback null, JSON.parse body
 
 
