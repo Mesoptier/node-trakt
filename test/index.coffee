@@ -5,5 +5,5 @@ trakt.init
   username: "tube-test"
   password: "tube-test"
 
-trakt.movieComments { title: "tt1210819" }, (err, data) ->
+trakt.movieSummary { title: "tt1210819" }, (err, data) ->
   console.log err, data
