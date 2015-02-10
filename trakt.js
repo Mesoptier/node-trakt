@@ -28,8 +28,9 @@ Trakt.prototype.request = function (path, options) {
   return request(o);
 };
 
-Trakt.prototype.get = function (path, options) {
+Trakt.prototype.get = function (path, qs, options) {
   var o = { method: "get" };
+  util.extend(o, { qs: qs });
   util.extend(o, options);
   return this.request(path, o);
 };
