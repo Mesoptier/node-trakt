@@ -1,8 +1,10 @@
 var request = require("request-promise");
-var methods = require("./methods");
 var util = require("./util");
+var extend = util.extend;
 
-module.exports = Trakt;
+// TODO: Support pagination
+// TODO: Support extended info
+// TODO: Support authentication
 
 function Trakt(apiKey) {
   this.baseUrl = "https://api-v2launch.trakt.tv";
@@ -16,21 +18,24 @@ function Trakt(apiKey) {
   };
 }
 
-util.extend(Trakt.prototype, methods);
-
 Trakt.prototype.request = function (path, options) {
   var o = {
     url: this.baseUrl + path
   };
-  util.extend(o, this.defaults);
-  util.extend(o, options);
+  extend(o, this.defaults);
+  extend(o, options);
 
   return request(o);
 };
 
 Trakt.prototype.get = function (path, qs, options) {
   var o = { method: "get" };
-  util.extend(o, { qs: qs });
-  util.extend(o, options);
+  extend(o, { qs: qs });
+  extend(o, options);
   return this.request(path, o);
 };
+
+// Add the API methods
+extend(Trakt.prototype, require("./methods"));
+
+module.exports = Trakt;
