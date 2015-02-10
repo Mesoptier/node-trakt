@@ -1,33 +1,35 @@
-var restler = require("restler");
+var request = require("request-promise");
 var methods = require("./methods");
+var util = require("./util");
 
-function constructor(apiKey) {
-  this.defaults.headers = {
-    "Content-type": "application/json",
-    "trakt-api-key": apiKey,
-    "trakt-api-version": 2
+module.exports = Trakt;
+
+function Trakt(apiKey) {
+  this.baseUrl = "https://api-v2launch.trakt.tv";
+  this.defaults = {
+    headers: {
+      "Content-type": "application/json",
+      "trakt-api-key": apiKey,
+      "trakt-api-version": 2
+    },
+    json: true
   };
 }
 
-var defaults = {
-  baseURL: "https://api-v2launch.trakt.tv",
-  parser: false
-};
+util.extend(Trakt.prototype, methods);
 
-var Trakt = restler.service(constructor, defaults, methods);
-
-var oldGet = Trakt.prototype.get;
-Trakt.prototype.get = function () {
-  var req = oldGet.apply(this, arguments);
-
-  var oldEmit = req.emit;
-
-  req.emit = function (name) {
-    console.log(name);
-    oldEmit.apply(this, arguments);
+Trakt.prototype.request = function (path, options) {
+  var o = {
+    url: this.baseUrl + path
   };
+  util.extend(o, this.defaults);
+  util.extend(o, options);
 
-  return req;
+  return request(o);
 };
 
-module.exports = Trakt;
+Trakt.prototype.get = function (path, options) {
+  var o = { method: "get" };
+  util.extend(o, options);
+  return this.request(path, o);
+};

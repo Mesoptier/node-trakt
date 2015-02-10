@@ -1,5 +1,7 @@
 module.exports = {
   search: function (query, type) {
-    return this.get("/search", { query: { query: query, type: type } });
+    var options = { qs: { query: query } };
+    if (type) options.qs.type = type;
+    return this.get("/search", options);
   }
 };
