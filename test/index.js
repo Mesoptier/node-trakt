@@ -1,4 +1,4 @@
-var Trakt = require("../trakt");
+import { Trakt } from "../trakt";
 
 var apiKey = process.env.TRAKT_API_KEY;
 var api = new Trakt(apiKey);

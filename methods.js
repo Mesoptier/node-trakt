@@ -1,51 +1,44 @@
-var util = require("./util");
-var path = util.path;
+import { path } from "./util";
 
-var search = {
-  search: function (query, type) {
-    var qs = { query: query };
+export default {
+  search(query, type) {
+    let qs = { query: query };
     if (type) qs.type = type;
-    return this.get("/search", qs);
+    return this._get("/search", qs);
   },
 
-  searchId: function (type, id) {
-    var qs = { id_type: type, id: id };
-    return this.get("/search", qs);
-  }
-};
+  searchId(type, id) {
+    let qs = { id_type: type, id: id };
+    return this._get("/search", qs);
+  },
 
-var shows = {
-  showSummary: function (id, extended) {
-    var qs = {};
+  showSummary(id, extended) {
+    let qs = {};
     if (extended) qs.extended = extended;
-    return this.get(path("/shows/%", id), qs);
+    return this._get(path("/shows/%", id), qs);
   },
 
-  showAliases: function (id) {
-    return this.get(path("/shows/%/aliases", id));
+  showAliases(id) {
+    return this._get(path("/shows/%/aliases", id));
   },
 
-  showTranslations: function (id, language) {
-    return this.get(path("/shows/%/translations/%", id, language));
+  showTranslations(id, language) {
+    return this._get(path("/shows/%/translations/%", id, language));
   },
 
-  showComments: function (id) {
-    return this.get(path("/shows/%/comments", id));
+  showComments(id) {
+    return this._get(path("/shows/%/comments", id));
   },
 
-  showPeople: function (id) {
-    return this.get(path("/shows/%/people", id));
+  showPeople(id) {
+    return this._get(path("/shows/%/people", id));
   },
 
-  showRatings: function (id) {
-    return this.get(path("/shows/%/ratings", id));
+  showRatings(id) {
+    return this._get(path("/shows/%/ratings", id));
   },
 
-  showRelated: function (id) {
-    return this.get(path("/shows/%/related", id));
+  showRelated(id) {
+    return this._get(path("/shows/%/related", id));
   }
 };
-
-module.exports = {};
-util.extend(module.exports, search);
-util.extend(module.exports, shows);
