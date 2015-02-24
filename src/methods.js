@@ -1,22 +1,32 @@
 import { assertParams, rename, normalize } from "./util";
 
 export default {
+
+  /* === SCROBBLE === */
+
+  // TODO: scrobbleStart
+  // TODO: scrobblePause
+  // TODO: scrobbleStop
+
+  /* === SEARCH === */
+
   search(params) {
     try {
       assertParams(params, "query");
       normalize(params, "type");
     } catch (err) {
-      assertParams(params, "id", "type");
-      rename(params, "type", "id_type");
+      assertParams(params, "id", "id_type");
     }
-    return this._get("/search", params);
+    return this._request("get", "/search", params);
   },
+
+  /* === SHOWS === */
 
   showsPopular: { method: "get", path: "/shows/popular" },
 
   showsTrending: { method: "get", path: "/shows/trending" },
 
-  showsUpdates: { method: "get", path: "/shows/updated/:start_date", normalize: ["startDate"], rename: { startDate: "start_date" } },
+  showsUpdates: { method: "get", path: "/shows/updated/:start_date", normalize: ["start_date"] },
 
   showSummary: { method: "get", path: "/shows/:id", required: ["id"] },
 
@@ -26,10 +36,16 @@ export default {
 
   showComments: { method: "get", path: "/shows/:id/comments", required: ["id"] },
 
+  // TODO: showCollectionProgress
+  // TODO: showWatchedProgress
+
   showPeople: { method: "get", path: "/shows/:id/people", required: ["id"] },
 
   showRatings: { method: "get", path: "/shows/:id/ratings", required: ["id"] },
 
-  showRelated: { method: "get", path: "/shows/:id/related", required: ["id"] }
+  showRelated: { method: "get", path: "/shows/:id/related", required: ["id"] },
+
+  // TODO: showStats
+  // TODO: showWatching
 
 };
