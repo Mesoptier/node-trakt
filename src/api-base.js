@@ -43,10 +43,10 @@ export class ApiBase {
     return function (params) {
       if (options.required)
         assertParams.apply(null, [params, ...options.required]);
-      if (options.rename)
-        Object.keys(options.rename).forEach(oldKey => rename(params, oldKey, options.rename[oldKey]));
       if (options.normalize)
         options.normalize.forEach(key => normalize(params, key));
+      if (options.rename)
+        Object.keys(options.rename).forEach(oldKey => rename(params, oldKey, options.rename[oldKey]));
 
       return this["_" + options.method].call(this, options.path, params);
     };
