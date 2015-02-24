@@ -1,29 +1,28 @@
-import request from "request-promise";
-import { extend, clone } from "./util";
+import request from "superagent-bluebird-promise";
+import { resolve as resolveUrl } from "url";
+import { path as buildPath, extend, clone } from "./util";
 
 export class ApiBase {
 
-  constructor({ baseUrl, defaults }) {
+  constructor({ baseUrl, modifier }) {
     this.baseUrl = baseUrl;
-    this.defaults = defaults;
+    this.modifier = modifier;
   }
 
-  _request(path, options) {
-    var o = {
-      url: this.baseUrl + path
-    };
-    extend(o, this.defaults);
-    extend(o, options);
-
-    let req = request(o);
-    return req.promise();
+  _request(method, path, params, modifier) {
+    let url = resolveUrl(this.baseUrl, buildPath(path, params));
+    return request(method, url)
+      .use(this.modifier)
+      .use(modifier)
+    .promise()
+      .catch(console.error)
+      .then(res => res.body);
   }
 
-  _get(path, qs, options) {
-    var o = { method: "get" };
-    extend(o, { qs: qs });
-    extend(o, options);
-    return this._request(path, o);
+  _get(path, params) {
+    return this._request("get", path, params, (req) => {
+      req.query(params);
+    });
   }
 
   static _installMethods(methods) {

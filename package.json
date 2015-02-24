@@ -3,7 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
-    "request-promise": "^0.4.0"
+    "bluebird": "^2.9.12",
+    "superagent": "^0.21.0",
+    "superagent-bluebird-promise": "^0.6.0"
   },
   "devDependencies": {
     "gulp": "^3.8.11"

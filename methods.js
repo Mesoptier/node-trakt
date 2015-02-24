@@ -1,4 +1,4 @@
-import { path, assertParams, rename, normalize } from "./util";
+import { assertParams, rename, normalize } from "./util";
 
 export default {
   search(params) {
@@ -14,36 +14,36 @@ export default {
 
   showSummary(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id", params), params);
+    return this._get("/shows/:id", params);
   },
 
   showAliases(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id/aliases", params), params);
+    return this._get("/shows/:id/aliases", params);
   },
 
   showTranslations(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id/translations/:language", params), params);
+    return this._get("/shows/:id/translations/:language", params);
   },
 
   showComments(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id/comments", params), params);
+    return this._get("/shows/:id/comments", params);
   },
 
   showPeople(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id/people", params), params);
+    return this._get("/shows/:id/people", params);
   },
 
   showRatings(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id/ratings", params), params);
+    return this._get("/shows/:id/ratings", params);
   },
 
   showRelated(params) {
     assertParams(params, "id");
-    return this._get(path("/shows/:id/related", params), params);
+    return this._get("/shows/:id/related", params);
   }
 };

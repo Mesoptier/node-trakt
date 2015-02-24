@@ -6,13 +6,11 @@ export class Trakt extends ApiBase {
   constructor(apiKey) {
     super({
       baseUrl: "https://api-v2launch.trakt.tv",
-      defaults: {
-        headers: {
-          "Content-type": "application/json",
-          "trakt-api-key": apiKey,
-          "trakt-api-version": 2
-        },
-        json: true
+      modifier(request) {
+        request
+          .set("trakt-api-key", apiKey)
+          .set("trakt-api-version", 2)
+          .type("json");
       }
     });
   }
