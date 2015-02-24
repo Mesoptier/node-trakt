@@ -41,4 +41,11 @@ function _delete(object, key) {
   return value;
 }
 
+export function clone(object) {
+  if (object == null || typeof object !== "object") return object;
+  let copy = object.constructor();
+  for (let key in object) {
+    if (object.hasOwnProperty(key)) copy[key] = object[key];
+  }
+  return copy;
 }

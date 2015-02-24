@@ -1,5 +1,5 @@
 import request from "request-promise";
-import { extend } from "./util";
+import { extend, clone } from "./util";
 
 export class ApiBase {
 
@@ -15,7 +15,8 @@ export class ApiBase {
     extend(o, this.defaults);
     extend(o, options);
 
-    return request(o);
+    let req = request(o);
+    return req.promise();
   }
 
   _get(path, qs, options) {
@@ -28,7 +29,7 @@ export class ApiBase {
   static _installMethods(methods) {
     for (let name of Object.keys(methods)) {
       Object.defineProperty(this.prototype, name, {
-        value: methods[name]
+        value: function (params) { return methods[name].call(this, clone(params)); }
       });
     }
   }
