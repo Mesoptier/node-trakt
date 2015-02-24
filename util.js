@@ -1,3 +1,5 @@
+import assert from "assert";
+
 export function extend(destination, source) {
   for (let k in source) {
     if (source.hasOwnProperty(k)) {
@@ -6,18 +8,37 @@ export function extend(destination, source) {
   }
 }
 
-export function path(path) {
-  let params = [], i;
-  for (i = 1; i < arguments.length; i++)
-    params[i - 1] = arguments[i];
-
-  return pathReplace(path, params);
+export function path(_path, params) {
+  return _path.replace(/(\/?):(\w+)(\/.*)?$/, (math, pre, key, _path) =>
+    params.hasOwnProperty(key)
+      ? pre + _delete(params, key) + (_path ? path(_path, params) : "")
+      : ""
+  );
 }
 
-function pathReplace(path, params) {
-  return path.replace(/(\/?)%(.*)$/g, (match, pre, path) => {
-    return params.length && params[0] !== undefined
-      ? pre + params.shift() + pathReplace(path, params)
-      : "";
-  });
+export function assertParams(params, ...required) {
+  for (let key of required) {
+    assert(params.hasOwnProperty(key), `param '${key}' is required`);
+  }
+}
+
+export function rename(object, oldKey, newKey) {
+  if (object.hasOwnProperty(oldKey)) {
+    object[newKey] = _delete(object, oldKey);
+  }
+}
+
+export function normalize(object, key) {
+  if (object.hasOwnProperty(key)) {
+    if (Array.isArray(object[key]))
+      object[key] = object[key].join(",");
+  }
+}
+
+function _delete(object, key) {
+  let value = object[key];
+  delete object[key];
+  return value;
+}
+
 }

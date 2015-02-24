@@ -1,44 +1,49 @@
-import { path } from "./util";
+import { path, assertParams, rename, normalize } from "./util";
 
 export default {
-  search(query, type) {
-    let qs = { query: query };
-    if (type) qs.type = type;
-    return this._get("/search", qs);
+  search(params) {
+    try {
+      assertParams(params, "query");
+      normalize(params, "type");
+    } catch (err) {
+      assertParams(params, "id", "type");
+      rename(params, "type", "id_type");
+    }
+    return this._get("/search", params);
   },
 
-  searchId(type, id) {
-    let qs = { id_type: type, id: id };
-    return this._get("/search", qs);
+  showSummary(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id", params), params);
   },
 
-  showSummary(id, extended) {
-    let qs = {};
-    if (extended) qs.extended = extended;
-    return this._get(path("/shows/%", id), qs);
+  showAliases(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id/aliases", params), params);
   },
 
-  showAliases(id) {
-    return this._get(path("/shows/%/aliases", id));
+  showTranslations(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id/translations/:language", params), params);
   },
 
-  showTranslations(id, language) {
-    return this._get(path("/shows/%/translations/%", id, language));
+  showComments(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id/comments", params), params);
   },
 
-  showComments(id) {
-    return this._get(path("/shows/%/comments", id));
+  showPeople(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id/people", params), params);
   },
 
-  showPeople(id) {
-    return this._get(path("/shows/%/people", id));
+  showRatings(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id/ratings", params), params);
   },
 
-  showRatings(id) {
-    return this._get(path("/shows/%/ratings", id));
-  },
-
-  showRelated(id) {
-    return this._get(path("/shows/%/related", id));
+  showRelated(params) {
+    assertParams(params, "id");
+    return this._get(path("/shows/:id/related", params), params);
   }
 };

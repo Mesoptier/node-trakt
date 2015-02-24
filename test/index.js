@@ -3,19 +3,10 @@ import { Trakt } from "../trakt";
 var apiKey = process.env.TRAKT_API_KEY;
 var api = new Trakt(apiKey);
 
-api.search("house of cards", "show")
-  .then(function (data) {
-    console.log("Found %d shows", data.length);
-    return data;
+api.search({ query: "castle", type: "show" })
+  .map((item) => {
+    return api.showSummary({ id: item.show.ids.trakt });
   })
-  .map(function (item) {
-    var id = item.show.ids.slug;
-    return api.showSummary(id, "full");
-  })
-  .each(function (show) {
-    console.log("");
-    console.log("%s", show.title);
-    console.log("| Year: %d", show.year);
-    console.log("| Network: %s", show.network);
-    console.log("| Status: %s", show.status);
+  .map((show) => {
+    console.log(show);
   });
