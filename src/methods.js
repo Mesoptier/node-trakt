@@ -12,6 +12,12 @@ export default {
     return this._get("/search", params);
   },
 
+  showsPopular: { method: "get", path: "/shows/popular" },
+
+  showsTrending: { method: "get", path: "/shows/trending" },
+
+  showsUpdates: { method: "get", path: "/shows/updated/:start_date", normalize: ["startDate"], rename: { startDate: "start_date" } },
+
   showSummary: { method: "get", path: "/shows/:id", required: ["id"] },
 
   showAliases: { method: "get", path: "/shows/:id/aliases", required: ["id"] },

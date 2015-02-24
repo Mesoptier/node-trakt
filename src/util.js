@@ -29,8 +29,14 @@ export function rename(object, oldKey, newKey) {
 
 export function normalize(object, key) {
   if (object.hasOwnProperty(key)) {
-    if (Array.isArray(object[key]))
-      object[key] = object[key].join(",");
+    let value = object[key];
+
+    if (Array.isArray(value))
+      value = value.join(",");
+    else if (value instanceof Date)
+      value = value.getUTCFullYear() + "-" + _pad(value.getUTCMonth() + 1, 2) + "-" + _pad(value.getUTCDate(), 2);
+
+    object[key] = value;
   }
 }
 
@@ -38,6 +44,14 @@ function _delete(object, key) {
   let value = object[key];
   delete object[key];
   return value;
+}
+
+function _pad(string, length) {
+  string += "";
+  while (string.length < length) {
+    string = "0" + string;
+  }
+  return string;
 }
 
 export function clone(object) {
