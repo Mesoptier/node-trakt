@@ -4,5 +4,8 @@
   "private": true,
   "dependencies": {
     "request-promise": "^0.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11"
   }
 }
