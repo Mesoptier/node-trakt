@@ -12,38 +12,18 @@ export default {
     return this._get("/search", params);
   },
 
-  showSummary(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id", params);
-  },
+  showSummary: { method: "get", path: "/shows/:id", required: ["id"] },
 
-  showAliases(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id/aliases", params);
-  },
+  showAliases: { method: "get", path: "/shows/:id/aliases", required: ["id"] },
 
-  showTranslations(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id/translations/:language", params);
-  },
+  showTranslations: { method: "get", path: "/shows/:id/translations/:language", required: ["id"] },
 
-  showComments(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id/comments", params);
-  },
+  showComments: { method: "get", path: "/shows/:id/comments", required: ["id"] },
 
-  showPeople(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id/people", params);
-  },
+  showPeople: { method: "get", path: "/shows/:id/people", required: ["id"] },
 
-  showRatings(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id/ratings", params);
-  },
+  showRatings: { method: "get", path: "/shows/:id/ratings", required: ["id"] },
 
-  showRelated(params) {
-    assertParams(params, "id");
-    return this._get("/shows/:id/related", params);
-  }
+  showRelated: { method: "get", path: "/shows/:id/related", required: ["id"] }
+
 };

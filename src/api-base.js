@@ -1,6 +1,6 @@
 import request from "superagent-bluebird-promise";
 import { resolve as resolveUrl } from "url";
-import { path as buildPath, extend, clone } from "./util";
+import { path as buildPath, clone, assertParams, rename, normalize } from "./util";
 
 export class ApiBase {
 
@@ -27,10 +27,29 @@ export class ApiBase {
 
   static _installMethods(methods) {
     for (let name of Object.keys(methods)) {
+      let method = methods[name];
+
+      // Build short-hand methods
+      if (typeof method != "function")
+        method = this._buildMethod(method);
+
       Object.defineProperty(this.prototype, name, {
-        value: function (params) { return methods[name].call(this, clone(params)); }
+        value: function (params) { return method.call(this, clone(params)); }
       });
     }
+  }
+
+  static _buildMethod(options) {
+    return function (params) {
+      if (options.required)
+        assertParams.apply(null, [params, ...options.required]);
+      if (options.rename)
+        Object.keys(options.rename).forEach(oldKey => rename(params, oldKey, options.rename[oldKey]));
+      if (options.normalize)
+        options.normalize.forEach(key => normalize(params, key));
+
+      return this["_" + options.method].call(this, options.path, params);
+    };
   }
 
 }
