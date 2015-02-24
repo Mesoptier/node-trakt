@@ -1,6 +1,7 @@
 {
   "name": "node-trakt",
   "version": "2.0.0",
+  "main": "./src/trakt.js",
   "private": true,
   "dependencies": {
     "bluebird": "^2.9.12",
