@@ -1,5 +1,3 @@
-import assert from "assert";
-
 export function extend(destination, source) {
   for (let k in source) {
     if (source.hasOwnProperty(k)) {
@@ -18,7 +16,8 @@ export function path(_path, params) {
 
 export function assertParams(params, ...required) {
   for (let key of required) {
-    assert(params.hasOwnProperty(key), `param '${key}' is required`);
+    if (!params.hasOwnProperty(key))
+      throw new Error(`param '${key}' is required`);
   }
 }
 
